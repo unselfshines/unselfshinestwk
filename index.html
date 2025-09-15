@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unselfshines[.FEZ] - Визитка</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: url('file:///C:/Users/tamogasko/Desktop/Sitets/Backgorund.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+            padding: 20px;
+            perspective: 1000px;
+            overflow: hidden;
+        }
+        
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: -1;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 500px;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transform-style: preserve-3d;
+            transition: transform 0.1s ease;
+        }
+        
+        .profile-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .avatar-container {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 5px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 20px;
+        }
+        
+        #avatar {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            background: linear-gradient(45deg, #6c5ce7, #00cec9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 60px;
+        }
+        
+        .nickname {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 5px;
+            text-align: center;
+        }
+        
+        .pronouns {
+            font-size: 16px;
+            color: #b0b0b0;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        
+        .social-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            width: 100%;
+            margin-bottom: 30px;
+        }
+        
+        .social-btn {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 12px 20px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            text-decoration: none;
+            color: #fff;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .social-btn:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+        }
+        
+        .social-btn i {
+            margin-right: 10px;
+            font-size: 20px;
+        }
+        
+        .player-container {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .player-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .player-title {
+            font-size: 22px;
+            font-weight: 600;
+        }
+        
+        .now-playing {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: 10px;
+        }
+        
+        .song-title {
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+        
+        .song-artist {
+            font-size: 13px;
+            color: #b0b0b0;
+        }
+        
+        .player-controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .control-btn {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 20px;
+            cursor: pointer;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.08);
+            transition: all 0.3s ease;
+        }
+        
+        .control-btn:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        .play-btn {
+            width: 55px;
+            height: 55px;
+            font-size: 24px;
+            background: rgba(107, 92, 231, 0.3);
+        }
+        
+        .play-btn:hover {
+            background: rgba(107, 92, 231, 0.5);
+        }
+        
+        .mute-btn {
+            margin-left: auto;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            
+            .profile-section {
+                padding: 10px;
+            }
+            
+            .avatar-container {
+                width: 150px;
+                height: 150px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="container">
+        <div class="profile-section">
+            <div class="avatar-container">
+                <div id="avatar"></div>
+            </div>
+            
+            <h1 class="nickname" id="nickname">Unselfshines[.FEZ]</h1>
+            <p class="pronouns" id="pronouns">PCTweaker</p>
+            
+            <div class="social-buttons" id="social-buttons">
+                <!-- Социальные кнопки будут добавлены через JS -->
+            </div>
+        </div>
+        
+        <div class="player-container">
+            <div class="player-header">
+                <h2 class="player-title">Музыкальный плеер</h2>
+            </div>
+            
+            <div class="now-playing">
+                <div class="song-title" id="current-song-title">Я так обожаю</div>
+                <div class="song-artist" id="current-song-artist">Dayerteq</div>
+            </div>
+            
+            <div class="player-controls">
+                <button class="control-btn" id="prev-btn" title="Предыдущий трек">
+                    <i class="fas fa-step-backward"></i>
+                </button>
+                <button class="control-btn play-btn" id="play-btn" title="Воспроизведение/Пауза">
+                    <i class="fas fa-play" id="play-icon"></i>
+                </button>
+                <button class="control-btn" id="next-btn" title="Следующий трек">
+                    <i class="fas fa-step-forward"></i>
+                </button>
+                <button class="control-btn mute-btn" id="mute-btn" title="Вкл/Выкл звук">
+                    <i class="fas fa-volume-up" id="volume-icon"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ===== НАСТРОЙКИ =====
+        // Замените эти значения на свои
+        
+        // Фоновая картинка (укажите URL или оставьте цветной градиент)
+        const backgroundImage = 'images/Backgorund.jpg';
+        
+        // Аватар (укажите URL или оставьте цветной блок)
+        const avatarImage = 'images/Avatar.jpg';
+        
+        // Никнейм и местоимения
+        const userNickname = 'Unselfshines[.FEZ]';
+        const userPronouns = 'PCTweaker';
+        
+        // Социальные сети (название, иконка, URL)
+        const socialLinks = [
+            { name: 'FunPay', icon: 'fas fa-shopping-cart', url: 'https://funpay.com/uk/' },
+            { name: 'Telegram', icon: 'fab fa-telegram', url: 'https://t.me/mal1cho' },
+            { name: 'Discord', icon: 'fab fa-discord', url: 'https://discord.gg/CH2GrzkxMN' },
+            { name: 'YouTube', icon: 'fab fa-youtube', url: 'https://www.youtube.com/@unselfshines' }
+        ];
+        
+        // Музыкальный плейлист (укажите прямые ссылки на аудиофайлы)
+        const playlist = [
+            { title: 'Я так обожаю', artist: 'Dayerteq', file: 'audio/5mewmet2.mp3' },
+            { title: 'Мефистофель', artist: 'Dayerteq', file: 'audio/5Mewmet1.mp3' },
+            { title: 'Контра Сити', artist: 'Dayerteq', file: 'audio/5Mewmet.mp3' },
+            { title: 'Венерический букетик', artist: 'Dayerteq', file: 'audio/Dayerteq1.mp3' },
+            { title: 'Ореол', artist: 'Dayerteq', file: 'audio/Dayerteq.mp3' }
+        ];
+        
+        // ===== КОНЕЦ НАСТРОЕК =====
+        
+        // Применение настроек
+        document.addEventListener('DOMContentLoaded', function() {
+            // Установка фона
+            if (backgroundImage) {
+                document.body.style.background = `url('${backgroundImage}') no-repeat center center fixed`;
+                document.body.style.backgroundSize = 'cover';
+            }
+            
+            // Установка аватара
+            const avatarElement = document.getElementById('avatar');
+            if (avatarImage) {
+                avatarElement.style.backgroundImage = `url('${avatarImage}')`;
+                avatarElement.style.backgroundSize = 'cover';
+                avatarElement.style.backgroundPosition = 'center';
+                avatarElement.innerHTML = '';
+            } else {
+                avatarElement.innerHTML = '<i class="fas fa-user"></i>';
+            }
+            
+            // Установка ника и местоимений
+            document.getElementById('nickname').textContent = userNickname;
+            document.getElementById('pronouns').textContent = userPronouns;
+            
+            // Добавление социальных кнопок
+            const socialButtonsContainer = document.getElementById('social-buttons');
+            socialLinks.forEach(link => {
+                const button = document.createElement('a');
+                button.href = link.url;
+                button.target = '_blank';
+                button.rel = 'noopener noreferrer';
+                button.className = 'social-btn';
+                button.innerHTML = `<i class="${link.icon}"></i> ${link.name}`;
+                socialButtonsContainer.appendChild(button);
+            });
+            
+            // Инициализация плеера
+            const audio = new Audio();
+            let currentSongIndex = 0;
+            let isPlaying = true;
+            let isMuted = false;
+            
+            const playBtn = document.getElementById('play-btn');
+            const playIcon = document.getElementById('play-icon');
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            const muteBtn = document.getElementById('mute-btn');
+            const volumeIcon = document.getElementById('volume-icon');
+            const songTitle = document.getElementById('current-song-title');
+            const songArtist = document.getElementById('current-song-artist');
+            
+            // Функция воспроизведения песни
+            function playSong(index) {
+                if (index >= 0 && index < playlist.length) {
+                    currentSongIndex = index;
+                    audio.src = playlist[index].file;
+                    
+                    // Пытаемся воспроизвести автоматически
+                    const playPromise = audio.play();
+                    
+                    if (playPromise !== undefined) {
+                        playPromise.then(() => {
+                            // Автовоспроизведение успешно
+                            isPlaying = true;
+                            playIcon.className = 'fas fa-pause';
+                        }).catch(error => {
+                            // Автовоспроизведение не удалось, требуется действие пользователя
+                            console.error("Автовоспроизведение заблокировано:", error);
+                            isPlaying = false;
+                            playIcon.className = 'fas fa-play';
+                            
+                            // Показываем уведомление о необходимости взаимодействия
+                            alert("Нажмите кнопку воспроизведения, чтобы начать прослушивание музыки.");
+                        });
+                    }
+                    
+                    // Обновление информации о текущем треке
+                    songTitle.textContent = playlist[index].title;
+                    songArtist.textContent = playlist[index].artist;
+                }
+            }
+            
+            // Автопереход к следующей песне
+            audio.addEventListener('ended', () => {
+                let newIndex = currentSongIndex + 1;
+                if (newIndex >= playlist.length) newIndex = 0;
+                playSong(newIndex);
+            });
+            
+            // Обработчики событий для кнопок управления
+            playBtn.addEventListener('click', () => {
+                if (isPlaying) {
+                    audio.pause();
+                    playIcon.className = 'fas fa-play';
+                } else {
+                    audio.play().catch(error => {
+                        console.error("Ошибка воспроизведения:", error);
+                    });
+                    playIcon.className = 'fas fa-pause';
+                }
+                isPlaying = !isPlaying;
+            });
+            
+            prevBtn.addEventListener('click', () => {
+                let newIndex = currentSongIndex - 1;
+                if (newIndex < 0) newIndex = playlist.length - 1;
+                playSong(newIndex);
+            });
+            
+            nextBtn.addEventListener('click', () => {
+                let newIndex = currentSongIndex + 1;
+                if (newIndex >= playlist.length) newIndex = 0;
+                playSong(newIndex);
+            });
+            
+            muteBtn.addEventListener('click', () => {
+                if (isMuted) {
+                    audio.muted = false;
+                    volumeIcon.className = 'fas fa-volume-up';
+                } else {
+                    audio.muted = true;
+                    volumeIcon.className = 'fas fa-volume-mute';
+                }
+                isMuted = !isMuted;
+            });
+            
+            // Запуск первой песни
+            playSong(0);
+            
+            // Эффект наклона контейнера при движении мыши (уменьшенная интенсивность)
+            const container = document.getElementById('container');
+            document.addEventListener('mousemove', (e) => {
+                const x = e.clientX;
+                const y = e.clientY;
+                
+                const centerX = window.innerWidth / 2;
+                const centerY = window.innerHeight / 2;
+                
+                // Уменьшенные коэффициенты для более сдержанного наклона
+                const rotateX = (y - centerY) / 40;
+                const rotateY = (centerX - x) / 40;
+                
+                container.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+            });
+            
+            document.addEventListener('mouseleave', () => {
+                container.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
+            });
+        });
+    </script>
+</body>
+</html>
